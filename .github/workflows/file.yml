@@ -22,7 +22,11 @@ jobs:
 
       - name: Set file name output
         id: the-file-name
-        run: echo "MNAME=$(ls *.mp4)" >> "$GITHUB_OUTPUT"
+        run: 
+          7z x Videos.zip
+          ls Videos
+          ls .
+          echo "MNAME=$(ls *.mp4)" >> "$GITHUB_OUTPUT"
           
       - name: Create Release
         id: create_release
