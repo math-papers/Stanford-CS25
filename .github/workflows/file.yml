@@ -22,7 +22,7 @@ jobs:
 
       - name: Set file name output
         id: the-file-name
-        run: 
+        run: |
           7z x Videos.zip
           ls Videos
           ls .
