@@ -24,9 +24,6 @@ jobs:
         id: the-file-name
         run: |
           7z x Videos.zip
-          ls .
-          ls Videos
-          ls .
           echo "MNAME=$(ls *.mp4)" >> "$GITHUB_OUTPUT"
           
       - name: Create Release
