@@ -1,0 +1,47 @@
+name: Upload
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main1
+  schedule:
+    - cron: "0 0 1 1 *"
+
+jobs:
+  build:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Set tag output
+        id: the-tag-name
+        run: echo "MNAME=v1" >> "$GITHUB_OUTPUT"
+          
+      - run: wget --content-disposition https://sherri19.oceansaver.in/pacific/?1WDdAl35p2Mqx5AlNwjUgxvUolI
+
+      - name: Set file name output
+        id: the-file-name
+        run: echo "MNAME=$(ls *.mp4)" >> "$GITHUB_OUTPUT"
+          
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.the-tag-name.outputs.MNAME }}
+          release_name: Release ${{ steps.the-tag-name.outputs.MNAME }}
+          draft: false
+          prerelease: false
+          
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. 
+          asset_path: ${{ steps.the-file-name.outputs.MNAME }}
+          asset_name: ${{ steps.the-file-name.outputs.MNAME }}
+          asset_content_type: video/mp4
