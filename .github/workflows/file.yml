@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main1
+      - main
   schedule:
     - cron: "0 0 1 1 *"
 
@@ -18,7 +18,7 @@ jobs:
         id: the-tag-name
         run: echo "MNAME=v1" >> "$GITHUB_OUTPUT"
           
-      - run: wget --content-disposition https://sherri19.oceansaver.in/pacific/?1WDdAl35p2Mqx5AlNwjUgxvUolI
+      - run: wget --content-disposition https://wade72.oceansaver.in/pacific/?n1W1YOdFlOpytZpNL10zg4k.d2FkZTcyLm9jZWFuc2F2ZXIuaW4=
 
       - name: Set file name output
         id: the-file-name
